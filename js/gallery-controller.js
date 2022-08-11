@@ -2,8 +2,13 @@
 
 function renderGallery() {
     const elGrid = document.querySelector('.grid-container')
-    const gallery = getGallery()
-
+    const currSearchValue = document.getElementById('search-input').value
+    let gallery
+    if (!currSearchValue) {
+        gallery = getGalleryForDisplay()
+    } else {
+        gallery = getGallerySearch(currSearchValue)
+    }
 
     let htmlStr = gallery.map(img =>
         `
@@ -14,3 +19,6 @@ function renderGallery() {
 
 }
 
+function onSearchInput() {
+    renderGallery()
+}

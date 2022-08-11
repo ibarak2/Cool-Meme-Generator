@@ -32,18 +32,14 @@
     <section class="main-search-container">
         <input type="file" class="file-input" name="image" onchange="onImgUpload(event)" />
 
-        <form onsubmit="onSearchSubmit(event)" class="search-form">
-            <input type="text" placeholder="Search Image">
-            <button type="submit">Search</button>
-            <button>🔀</button>
-        </form>
+        <input oninput="onSearchInput()" type="text" placeholder="Search Image" id="search-input">
+        <button>🔀</button>
 
     </section>
 
 
     <section class="main-gallery">
         <div class="grid-container">
-            <img class="gallery-img" src="/imgs/gallery-imgs/1.jpg" alt="">
         </div>
 
     </section>
@@ -56,20 +52,25 @@
 
         <div class="edit-container">
             <div class="edit-text">
-                <input type="text" onkeyup="onTypingText()" placeholder="Write Your text here">
+                <input type="text" oninput="onTypingText()" placeholder="Write Your text here">
             </div>
-            <div class="edit-add"><button>+</button></div>
-            <div class="edit-delete"><button>🗑️</button></div>
+            <div class="edit-add"><button onclick="onAddNewText()">+</button></div>
+            <div class="edit-change"><button onclick="onChangeLine()">Change line</button></div>
+            <div class="edit-delete"><button onclick="onDeleteText()">🗑️</button></div>
             <div class="edit-fonts">
-                <button>A+</button>
-                <button>A-</button>
-                <button>Left</button>
-                <button>Center</button>
-                <button>Right</button>
+                <button onclick="onFontSizeUp()">A+</button>
+                <button onclick="onFontSizeDown()">A-</button>
+                <button onclick="onStrokeSizeUp()">S+</button>
+                <button onclick="onStrokeSizeDown()">S-</button>
+                <label for="">FontColor</label>
+                <input onchange="onFontColorChange()" type="color" name="" id="font-color">
+                <label for="">StrokeColor</label>
+                <input onchange="onStrokeColorChange()" type="color" name="" id="stroke-color">
+
             </div>
-            <div class="edit-download"><button>Download</button></div>
-            <div class="edit-save"><button>Save</button></div>
-            <div class="edit-share"><button>Share</button></div>
+            <div class="edit-download"><button onclick="onDownload()"><a href="">Download</a></button></div>
+            <div class="edit-save"><button onclick="onSave()">Save</button></div>
+            <div class="edit-share"><button onclick="onShareToFacebook()">Share to Facebook</button></div>
 
 
 
@@ -78,7 +79,8 @@
     </section>
 
 
-    <section class="main-saved" hidden>
+    <section class="main-saved">
+        <img src="" alt="">
 
     </section>
 
@@ -86,8 +88,8 @@
 
     </section>
 
-
     <script src="js/services/storage-service.js"></script>
+    <script src="js/services/upload-service.js"></script>
     <script src="js/services/gallery-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>

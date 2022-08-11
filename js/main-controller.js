@@ -1,15 +1,14 @@
 'use strict'
 
-
-
 const elSearchContainer = document.querySelector('.main-search-container')
 const elMainGallery = document.querySelector('.main-gallery')
 const elMainEdit = document.querySelector('.main-edit')
 
 function onInit() {
-    // elMainEdit.style.display = 'none'
-    // elSearchContainer.style.display = 'none'
-    // elMainGallery.style.display = 'none'
+    gElCanvas = document.querySelector('.canvas-container canvas')
+    gCtx = gElCanvas.getContext('2d')
+    resizeCanvas()
+    elMainEdit.style.display = 'none'
 
     console.log("hi");
     renderGallery()
@@ -17,29 +16,36 @@ function onInit() {
 }
 
 function onImgSelect(imgId) {
-    setNewMeme(imgId)
-    renderMeme(imgId)
+    const elCanvas = document.querySelector('.canvas-container canvas')
+    const center = { x: elCanvas.width / 2, y: elCanvas.height / 2 }
+    // console.log(center);
 
-    // gCtx.font = '16px impact'
-    // gCtx.fillText('Hi', gElCanvas.width / 2, gElCanvas.height / 4)
-
-
-
+    setNewMeme(imgId, center)
+    renderMeme()
 
 
-    // elSearchContainer.style.display = 'none'
-    // elMainGallery.style.display = 'none'
+
+    elSearchContainer.style.display = 'none'
+    elMainGallery.style.display = 'none'
+    elMainEdit.style.display = 'flex'
+
 
 }
 
 function onImgUpload(ev) {
+    const elCanvas = document.querySelector('.canvas-container canvas')
+    const center = { x: elCanvas.width / 2, y: elCanvas.height / 2 }
+    setNewMeme(0, center)
     loadImageFromInput(ev, renderImg)
 
+    elSearchContainer.style.display = 'none'
+    elMainGallery.style.display = 'none'
+    elMainEdit.style.display = 'flex'
+
 }
 
-function loadImageFromInput(ev, onImageReady) {
 
-}
+
 
 
 function onSearchSubmit(e) {
