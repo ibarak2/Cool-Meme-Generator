@@ -96,13 +96,19 @@ function drawText(x, y, color, strokeColor, size, strokeSize, text) {
 
 function addListeners() {
     addMouseListeners()
-    // addTouchListeners()
+    addTouchListeners()
 }
 
 function addMouseListeners() {
     gElCanvas.addEventListener('mousedown', onDown)
     gElCanvas.addEventListener('mousemove', onMove)
     gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchend', onUp)
 }
 
 function onDown(ev) {
@@ -134,7 +140,6 @@ function getEvPos(ev) {
         x: ev.offsetX,
         y: ev.offsetY
     }
-    // const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
     if (gTouchEvs.includes(ev.type)) {
         ev.preventDefault()
         ev = ev.changedTouches[0]
@@ -215,8 +220,20 @@ function onDownload() {
 }
 function onSave() {
     saveImg()
+    flashMsg('Saved to "Saved Memes"')
 
 }
 function onShareToFacebook() {
     shareImg()
+}
+
+// saved massege //
+
+function flashMsg(msg) {
+    const el = document.querySelector('.user-msg')
+    el.innerText = msg
+    el.classList.add('open')
+    setTimeout(() => {
+        el.classList.remove('open')
+    }, 3000)
 }

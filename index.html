@@ -8,6 +8,8 @@
     <title>Meme Generator</title>
     <link rel="shortcut icon" href="imgs/favicon/rickroll.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/main.css">
+
+
 </head>
 
 <body onload="onInit()">
@@ -20,20 +22,23 @@
             </div>
             <nav class="main-nav-container">
                 <ul class="main-nav clean-list flex">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Saved Memes</a></li>
-                    <li><a href="#">About</a></li>
+                    <li onclick="onInit()"><a href="#">Home</a></li>
+                    <li onclick="onSavedClick()"><a href="#">Saved Memes</a></li>
+                    <li onclick="openAbout()"><a href="#">About</a></li>
                 </ul>
             </nav>
+            <button class="toggle-menu" onclick="toggleMenu()">☰</button>
         </div>
     </header>
 
 
-    <section class="main-search-container">
-        <input type="file" class="file-input" name="image" onchange="onImgUpload(event)" />
+    <section class="main-search-container flex align-center">
+        <button class="upload-btn" onclick="document.querySelector('.file-input').click();">Upload Image...</button>
+        <input type="file" style="display:none;" class="file-input" name="image" accept="image/*"
+            onchange="onImgUpload(event)" />
 
-        <input oninput="onSearchInput()" type="text" placeholder="Search Image" id="search-input">
-        <button>🔀</button>
+        <input oninput="onSearchInput()" type="text" placeholder="Search Image..." id="search-input">
+        <div class="search-keywords flex justify-center align-center"></div>
 
     </section>
 
@@ -47,30 +52,36 @@
 
     <section class="main-edit flex justify-center">
         <div class="canvas-container">
-            <canvas width="666" height="666" style="outline:1px solid green"></canvas>
+            <canvas width="666" height="666" style="outline:1px solid black"></canvas>
         </div>
 
         <div class="edit-container">
             <div class="edit-text">
-                <input type="text" oninput="onTypingText()" placeholder="Write Your text here">
+                <input class="text-input" type="text" oninput="onTypingText()" placeholder="Write Your text here...">
             </div>
-            <div class="edit-add"><button onclick="onAddNewText()">+</button></div>
-            <div class="edit-change"><button onclick="onChangeLine()">Change line</button></div>
-            <div class="edit-delete"><button onclick="onDeleteText()">🗑️</button></div>
+            <div class="edit-add"><button class="add-btn" onclick="onAddNewText()">+</button></div>
+            <div class="edit-change"><button class="change-btn" onclick="onChangeLine()">Change line</button></div>
+            <div class="edit-delete"><button class="delete-btn" onclick="onDeleteText()">Delete
+                    Text</button></div>
             <div class="edit-fonts">
-                <button onclick="onFontSizeUp()">A+</button>
-                <button onclick="onFontSizeDown()">A-</button>
-                <button onclick="onStrokeSizeUp()">S+</button>
-                <button onclick="onStrokeSizeDown()">S-</button>
-                <label for="">FontColor</label>
+                <button class="size-btn" onclick="onFontSizeUp()">A+</button>
+                <button class="size-btn" onclick="onFontSizeDown()">A-</button>
+                <button class="size-btn" onclick="onStrokeSizeUp()">S+</button>
+                <button class="size-btn" onclick="onStrokeSizeDown()">S-</button>
+            </div>
+
+            <div class="edit-colors">
+                <label for="">Font Color</label>
                 <input onchange="onFontColorChange()" type="color" name="" id="font-color">
-                <label for="">StrokeColor</label>
+                <label for="">Stroke Color</label>
                 <input onchange="onStrokeColorChange()" type="color" name="" id="stroke-color">
 
             </div>
-            <div class="edit-download"><button onclick="onDownload()"><a href="">Download</a></button></div>
-            <div class="edit-save"><button onclick="onSave()">Save</button></div>
-            <div class="edit-share"><button onclick="onShareToFacebook()">Share to Facebook</button></div>
+
+            <div class="edit-download"><button class="export-btn" onclick="onDownload()"><a
+                        href="">Download</a></button></div>
+            <div class="edit-save"><button class="export-btn" onclick="onSave()">Save</button></div>
+            <div class="edit-share"><button class="export-btn" onclick="onShareToFacebook()">Share</button></div>
 
 
 
@@ -81,11 +92,20 @@
 
     <section class="main-saved">
         <img src="" alt="">
-
     </section>
 
-    <section class="main-about" hidden>
+    <div class="user-msg"></div>
 
+    <section class="main-about">
+        <h3>This "Cool Meme Generator" made by Barak Kaldess :)</h3>
+        <ul>
+            <li><a href="">Facebook</a></li>
+            <li><a href="">Instagram</a></li>
+            <li><a href="">Youtube</a></li>
+            <li><a href="">LinkedIn</a></li>
+        </ul>
+        <p>© Barak Kaldess</p>
+        <button onclick="closeAbout()">close</button>
     </section>
 
     <script src="js/services/storage-service.js"></script>

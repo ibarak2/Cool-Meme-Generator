@@ -118,6 +118,7 @@ function getImgById(imgId) {
 }
 
 function getGallerySearch(val) {
+    console.log(val);
     let gallery = gGallery.filter(img => img.keywords.find(element => {
         if (element.includes(val)) {
             return true
