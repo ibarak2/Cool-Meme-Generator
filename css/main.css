@@ -12,17 +12,17 @@
 
 @font-face {
   font-family: impact-regular;
-  src: url(/fonts/Impact/impact.ttf);
+  src: url(../fonts/Impact/impact.ttf);
 }
 
 @font-face {
   font-family: ubuntu-regular;
-  src: url(/fonts/Ubuntu/Ubuntu-Regular.ttf);
+  src: url(../fonts/Ubuntu/Ubuntu-Regular.ttf);
 }
 
 @font-face {
   font-family: ubuntu-bold;
-  src: url(/fonts/Ubuntu/Ubuntu-Bold.ttf);
+  src: url(../fonts/Ubuntu/Ubuntu-Bold.ttf);
 }
 
 /* BASE */
@@ -35,9 +35,11 @@
 
 html {
   color: #fff;
+  font-family: ubuntu-regular;
 }
 
 body {
+  width: 100%;
   background-color: #dd0239;
   background-image: url("https://www.transparenttextures.com/patterns/gravel.png");
 }
@@ -54,8 +56,8 @@ a {
 
 .main-content {
   max-width: 92%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 }
 
 .main-search-container {
@@ -414,7 +416,6 @@ a {
   align-items: center;
   justify-items: center;
   grid-template-columns: repeat(5, 1fr);
-  grid-row: repeat(5, 1fr);
   gap: 20px;
 }
 
@@ -466,6 +467,17 @@ a {
 
 /* mobile only */
 @media (max-width: 860px) {
+  .main-header {
+    min-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .main-content {
+    justify-content: space-between;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
   .logo {
     color: #fff;
     font-family: impact-regular;
@@ -479,7 +491,7 @@ a {
   }
 
   .main-search-container {
-    max-width: 92%;
+    min-width: 420px;
     margin-left: auto;
     margin-right: auto;
     flex-direction: column;
@@ -491,7 +503,7 @@ a {
 
   .grid-container {
     display: grid;
-    min-width: 450px;
+    min-width: 400px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(10, 1fr);
   }
@@ -514,14 +526,28 @@ a {
   .edit-container {
     width: 80%;
   }
+
+  .main-saved {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .main-saved img {
+    width: 160px;
+    height: 160px;
+  }
 }
 
 /* small */
-@media (min-width: 500px) {
+@media (min-width: 420px) {
 }
 
 /* medium */
 @media (min-width: 860px) {
+  .main-content {
+    max-width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .logo {
     color: #fff;
     font-family: impact-regular;
@@ -617,17 +643,12 @@ a {
   }
 
   .main-saved {
-    display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-row: repeat(5, 1fr);
-    gap: 20px;
   }
 
   .main-saved img {
-    border-radius: 5px;
     width: 150px;
     height: 150px;
-    cursor: pointer;
   }
 
   .toggle-menu {
@@ -690,6 +711,16 @@ a {
     grid-column: 5/7;
     grid-row: 6;
   }
+
+  .main-saved {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .main-saved img {
+    width: 180px;
+    height: 180px;
+  }
+
   .toggle-menu {
     display: none;
   }

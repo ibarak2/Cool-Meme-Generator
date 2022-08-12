@@ -92,10 +92,10 @@ function onWordClick(ev) {
 
 
         if ((ev.innerHTML).toString() === (Object.keys(fontSizes)[i]).toString()) {
-            if (fontSizes[Object.keys(fontSizes)[i]] >= 100) return
+            if (fontSizes[Object.keys(fontSizes)[i]] >= 60) return
             fontSizes[Object.keys(fontSizes)[i]] += Object.keys(fontSizes).length - 1
         } else {
-            if (fontSizes[Object.keys(fontSizes)[i]] <= 10) return
+            if (fontSizes[Object.keys(fontSizes)[i]] <= 16) return
             fontSizes[Object.keys(fontSizes)[i]] -= 1
         }
     }
@@ -123,7 +123,7 @@ function renderKeywords() {
 function createKeyWords() {
     let newFontSizes = loadFromStorage('keywordsDB') || null
     if (!newFontSizes) {
-        newFontSizes = { 'spongbob': 55, 'sad': 15, 'facts': 60, 'wtf': 30 }
+        newFontSizes = { 'spongbob': 45, 'sad': 15, 'facts': 50, 'wtf': 30 }
     }
     fontSizes = newFontSizes
     saveToStorage('keywordsDB', fontSizes)
