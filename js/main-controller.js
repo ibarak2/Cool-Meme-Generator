@@ -7,6 +7,8 @@ const elMainSaved = document.querySelector('.main-saved')
 const elMainAbout = document.querySelector('.main-about')
 const elBlank = document.querySelector('.blank')
 const elSearch = document.querySelector('#search-input')
+const elNav = document.querySelector('.main-nav')
+const elBlackScreen = document.querySelector('.black-screen')
 
 
 let fontSizes
@@ -16,69 +18,90 @@ let fontSizes
 
 function onInit() {
     console.log("hi");
+
     elSearch.value = ''
-    gElCanvas = document.querySelector('.canvas-container canvas')
-    gCtx = gElCanvas.getContext('2d')
-    resizeCanvas()
+
     elSearchContainer.style.display = 'flex'
     elMainGallery.style.display = 'grid'
     elMainSaved.style.display = 'none'
     elMainAbout.style.display = 'none'
     elMainEdit.style.display = 'none'
-    // elSearchContainer.style.display = 'none'
-    // elMainGallery.style.display = 'none'
+
     createKeyWords()
     renderKeywords()
 
     renderGallery()
+    removeMenu()
+}
 
+// Create Canvas //
+
+function createCanvas() {
+    gElCanvas = document.querySelector('.canvas-container canvas')
+    gCtx = gElCanvas.getContext('2d')
+    resizeCanvas()
+}
+
+// Render Gallery // 
+
+function renderGallery() {
+    const elGrid = document.querySelector('.grid-container')
+    const currSearchValue = document.getElementById('search-input').value
+    let gallery
+    if (!currSearchValue) {
+        gallery = getGalleryForDisplay()
+    } else {
+        gallery = getGallerySearch(currSearchValue)
+    }
+
+    let htmlStr = gallery.map(img =>
+        `
+    <img class="gallery-img gallery-img${img.id}" src="${img.imgURL}" alt="" onclick="onImgSelect(${img.id})">
+    `
+    )
+    elGrid.innerHTML = htmlStr.join('')
+
+}
+
+function onSearchInput() {
+    renderGallery()
 }
 
 
 // Pick or Upload a meme //
 
 function onImgSelect(imgId) {
-    gElCanvas = document.querySelector('.canvas-container canvas')
-    gCtx = gElCanvas.getContext('2d')
-    const elCanvas = document.querySelector('.canvas-container canvas')
-    const center = { x: elCanvas.width / 2, y: elCanvas.height / 2 }
-    // console.log(center);
+    elSearchContainer.style.display = 'none'
+    elMainGallery.style.display = 'none'
+    elMainEdit.style.display = 'flex'
+
+    createCanvas()
+
+    const center = { x: gElCanvas.width / 2, y: gElCanvas.height / 2 }
 
     setNewMeme(imgId, center)
     renderMeme()
 
-
-
-    elSearchContainer.style.display = 'none'
-    elMainGallery.style.display = 'none'
-    elMainEdit.style.display = 'flex'
-
+    document.querySelector('.text-input').value = ''
 
 }
 
 function onImgUpload(ev) {
-    gElCanvas = document.querySelector('.canvas-container canvas')
-    gCtx = gElCanvas.getContext('2d')
-    const elCanvas = document.querySelector('.canvas-container canvas')
-    const center = { x: elCanvas.width / 2, y: elCanvas.height / 2 }
-    setNewMeme(0, center)
-    loadImageFromInput(ev, renderImg)
-
     elSearchContainer.style.display = 'none'
     elMainGallery.style.display = 'none'
     elMainEdit.style.display = 'flex'
 
-}
+    createCanvas()
+
+    const center = { x: gElCanvas.width / 2, y: gElCanvas.height / 2 }
+
+    setNewMeme(0, center)
+    loadImageFromInput(ev, renderImg)
+
+    document.querySelector('.text-input').value = ''
 
 
-// Search Function //
 
-function onSearchSubmit(e) {
-    e.preventDefault()
-    const elSearch = document.querySelector('.search-form input')
-    const searchVal = elSearch.value
-
-    elSearch.value = ''
 }
 
 
@@ -87,7 +110,6 @@ function onSearchSubmit(e) {
 function onWordClick(ev) {
     document.getElementById('search-input').value = (ev.innerHTML).toString()
     onSearchInput()
-    renderKeywords()
     for (let i = 0; i < Object.keys(fontSizes).length; i++) {
 
 
@@ -100,6 +122,7 @@ function onWordClick(ev) {
         }
     }
     saveToStorage('keywordsDB', fontSizes)
+    renderKeywords()
 
 }
 
@@ -134,6 +157,7 @@ function createKeyWords() {
 
 function onSavedClick() {
     renderSavedMemes()
+    removeMenu()
 }
 
 function renderSavedMemes() {
@@ -163,10 +187,25 @@ function onSavedMemeClick(ev) {
 function openAbout() {
     elMainAbout.style.display = 'flex'
     elMainAbout.classList.add('open-about')
+    document.querySelector('.black').classList.add('black-open')
+    removeMenu()
 }
 
 function closeAbout() {
-    elMainAbout.style.display = 'none'
+    // elMainAbout.style.display = 'none'
     elMainAbout.classList.remove('open-about')
+    document.querySelector('.black').classList.remove('black-open')
+}
+
+// navbar menu // 
+function toggleMenu() {
+    elNav.classList.toggle('navbar-open')
+    elBlackScreen.classList.toggle('black-screen-open')
+
+}
+
+function removeMenu() {
+    elNav.classList.remove('navbar-open')
+    elBlackScreen.classList.remove('black-screen-open')
 
 }

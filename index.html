@@ -15,8 +15,7 @@
 <body onload="onInit()">
 
     <header class="main-header">
-        <div class="main-content flex align-center space-between ">
-
+        <div class="main-navbar-content flex align-center space-between">
             <div class="logo">
                 Meme Generator
             </div>
@@ -30,6 +29,7 @@
             <button class="toggle-menu" onclick="toggleMenu()">☰</button>
         </div>
     </header>
+    <div onclick="removeMenu()" class="black-screen"></div>
 
 
     <section class="main-search-container flex align-center">
@@ -96,17 +96,20 @@
 
     <div class="user-msg"></div>
 
-    <section class="main-about">
-        <h3>This "Cool Meme Generator" made by Barak Kaldess :)</h3>
-        <ul>
-            <li><a href="">Facebook</a></li>
-            <li><a href="">Instagram</a></li>
-            <li><a href="">Youtube</a></li>
-            <li><a href="">LinkedIn</a></li>
-        </ul>
-        <p>© Barak Kaldess</p>
-        <button onclick="closeAbout()">close</button>
-    </section>
+    <div class="black">
+        <section class="main-about">
+
+            <h3>This "Cool Meme Generator" made by Barak Kaldess :)</h3>
+            <ul class="clean-list">
+                <li><a href="https://bit.ly/31afWcf" target="_blank">Facebook</a></li>
+                <li><a href="https://bit.ly/3D72Uta" target="_blank">Instagram</a></li>
+                <li><a href="https://bit.ly/3E4rJHn" target="_blank">Youtube</a></li>
+                <li><a href="https://bit.ly/3PP8LdP" target="_blank">LinkedIn</a></li>
+            </ul>
+            <p>© Barak Kaldess</p>
+            <button class="about-btn" onclick="closeAbout()">close</button>
+        </section>
+    </div>
 
     <script src="js/services/storage-service.js"></script>
     <script src="js/services/upload-service.js"></script>

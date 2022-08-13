@@ -10,11 +10,11 @@ const gElCanvasContainer = document.querySelector('.canvas-container')
 
 function onTypingText() {
     const elText = document.querySelector('.edit-text input').value
-    console.log("som");
+
     setMemeText(elText, gCurrLine)
+
     addListeners()
     renderMeme()
-    console.log(gMeme);
 
 }
 
@@ -114,6 +114,8 @@ function addTouchListeners() {
 function onDown(ev) {
     // Getting the clicked position
     const pos = getEvPos(ev)
+    console.log(ev);
+    console.log(pos);
     // { x: 15, y : 15 }
     if (!isTextClicked(pos)) return
     console.log("Clicked");
@@ -153,7 +155,7 @@ function getEvPos(ev) {
 
 function onUp() {
     setTextDrag(false)
-    gElCanvas.style.cursor = 'grab'
+    gElCanvas.style.cursor = 'auto'
 }
 
 // Edit Buttons //

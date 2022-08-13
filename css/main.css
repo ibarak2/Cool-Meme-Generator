@@ -54,7 +54,7 @@ a {
 
 /* layouts */
 
-.main-content {
+.main-navbar-content {
   max-width: 92%;
   margin-inline-start: auto;
   margin-inline-end: auto;
@@ -71,7 +71,7 @@ a {
 }
 
 .main-gallery {
-  max-width: 92%;
+  /* max-width: 92%; */
   margin-left: auto;
   margin-right: auto;
 }
@@ -130,19 +130,36 @@ a {
 }
 
 .main-nav {
-  /* gap: 100px; */
+  background-color: #020405;
+  background-image: url("https://www.transparenttextures.com/patterns/grunge-wall.png");
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  transform: translateY(-100%);
+  transition: transform 0.6s;
+}
+
+.navbar-open {
+  display: flex;
+  transform: translateY(0);
+  transition: transform 0.6s;
 }
 
 .main-nav a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70px;
-  width: 200px;
+  height: 100px;
+  width: 100vw;
+  min-width: 500px;
   color: var(--color-white);
   font-family: ubuntu-regular;
   font-size: 1.5em;
   border-left: 2px solid black;
+  border-bottom: 2px solid black;
 }
 
 .main-nav a:hover {
@@ -151,6 +168,25 @@ a {
 
 .main-nav a:hover {
   cursor: pointer;
+}
+
+/* black screen */
+
+.black-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.507);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.black-screen-open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* keywords and search*/
@@ -201,6 +237,30 @@ a {
   background-color: #263636;
 }
 .upload-btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.toggle-menu {
+  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+  background-color: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  cursor: pointer;
+  color: #666666;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 5px 10px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffffff;
+}
+.toggle-menu:hover {
+  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+  background-color: #f6f6f6;
+}
+.toggle-menu:active {
   position: relative;
   top: 1px;
 }
@@ -409,6 +469,10 @@ a {
   top: 1px;
 }
 
+.export-btn a {
+  color: #666666;
+}
+
 /* Save memes */
 
 .main-saved {
@@ -444,18 +508,35 @@ a {
 
 /* About */
 
-.main-about {
-  background-color: #000000;
+.black {
+  display: none;
   position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000079;
+}
+.black.black-open {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+}
 
-  width: 30%;
-  height: 30%;
+.main-about {
+  background-color: #001717;
+  background-image: url("https://www.transparenttextures.com/patterns/woven-light.png");
+  text-align: center;
+  padding: 15%;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
+  font-size: 1.5em;
+
+  width: 85%;
+  height: 85%;
   top: 50%;
   left: 50%;
+  transform: (5%);
   transform: translate(200%, 200%);
 }
 
@@ -463,21 +544,47 @@ a {
   transform: translate(-50%, -50%);
 }
 
+.about-btn {
+  border-radius: 28px;
+  box-shadow: 0px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 16px;
+  background: #001717;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.about-btn:hover {
+  background: #686b6b;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.main-about a {
+  color: white;
+}
+
+.main-about a:hover {
+  color: rgb(192, 176, 176);
+}
+
 /* MQ */
 
 /* mobile only */
 @media (max-width: 860px) {
   .main-header {
-    min-width: 420px;
+    min-width: 500px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .main-content {
+  .main-navbar-content {
     justify-content: space-between;
     padding-left: 4%;
     padding-right: 4%;
   }
+
   .logo {
     color: #fff;
     font-family: impact-regular;
@@ -485,13 +592,8 @@ a {
     text-shadow: rgb(0, 0, 0) 6px 5px 2px;
   }
 
-  .main-nav {
-    display: none;
-    flex-direction: column;
-  }
-
   .main-search-container {
-    min-width: 420px;
+    min-width: 500px;
     margin-left: auto;
     margin-right: auto;
     flex-direction: column;
@@ -503,7 +605,7 @@ a {
 
   .grid-container {
     display: grid;
-    min-width: 400px;
+    min-width: 500px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(10, 1fr);
   }
@@ -516,6 +618,7 @@ a {
   .main-edit {
     flex-direction: column;
     align-items: center;
+    min-width: 500px;
   }
 
   .canvas-container {
@@ -529,6 +632,7 @@ a {
 
   .main-saved {
     grid-template-columns: repeat(2, 1fr);
+    min-width: 500px;
   }
 
   .main-saved img {
@@ -538,12 +642,12 @@ a {
 }
 
 /* small */
-@media (min-width: 420px) {
-}
+/* @media (min-width: 420px) {
+} */
 
 /* medium */
 @media (min-width: 860px) {
-  .main-content {
+  .main-navbar-content {
     max-width: 92%;
     margin-left: auto;
     margin-right: auto;
@@ -555,16 +659,23 @@ a {
     text-shadow: rgb(0, 0, 0) 6px 5px 2px;
   }
 
+  .main-nav {
+    position: static;
+    background-color: #020405;
+    flex-direction: row;
+    transform: translateX(0);
+  }
+
   .main-nav a {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.2em;
     height: 50px;
     width: 130px;
-    color: var(--color-white);
-    font-family: ubuntu-regular;
-    font-size: 1em;
+    min-width: 0;
     border-left: 2px solid black;
+    border-bottom: none;
   }
 
   .main-nav li:last-child {
