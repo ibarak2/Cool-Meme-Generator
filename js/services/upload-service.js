@@ -1,8 +1,6 @@
 'use strict'
 
-const gSavedMemesDB = 'memesDB'
-
-let gSavedMeme = loadFromStorage(gSavedMemesDB) || []
+let gSavedMeme = loadFromStorage('memesDB') || []
 
 
 function saveImg() {
@@ -11,7 +9,7 @@ function saveImg() {
         const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
         const newImgUrl = getImgUrl(uploadedImgUrl)
         gSavedMeme.push(newImgUrl)
-        saveToStorage(gSavedMemesDB, gSavedMeme)
+        saveToStorage('memesDB', gSavedMeme)
         console.log(gSavedMeme);
 
     }
@@ -42,9 +40,7 @@ function shareImg() {
 
     function onSuccessFacebook(uploadedImgUrl) {
         const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
-
     }
 
     doUploadImgFacebook(imgDataUrl, onSuccessFacebook);
@@ -75,5 +71,4 @@ function getImgUrl(uploadedImgUrl) {
     console.log(newUrl);
 
     return newUrl
-
 }

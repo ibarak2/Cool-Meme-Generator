@@ -16,20 +16,19 @@ function setNewMeme(imgId, pos) {
                 strokeColor: 'black',
                 strokeSize: 8,
                 pos,
-                isDrag: false
+                isDrag: false,
+                textWidth: 0
             }
         ]
     }
-    console.log(gMeme);
 }
+
+// CRUDL functions //
 
 function getMeme() {
     const meme = gMeme
-    return meme
-}
 
-function setMemeText(memeText, lineIdx) {
-    gMeme.lines[lineIdx].text = memeText
+    return meme
 }
 
 function newTextLine(pos) {
@@ -40,13 +39,23 @@ function newTextLine(pos) {
         color: 'white',
         strokeColor: 'black',
         pos,
-        isDrag: false
+        isDrag: false,
+        textWidth: 0
     }
 
     gMeme.lines.push(newText)
     console.log("Add new Text");
     gCurrLine++
 }
+
+function setMemeText(memeText, lineIdx) {
+    gMeme.lines[lineIdx].text = memeText
+}
+
+function setTextWidth(width) {
+    gMeme.lines[gCurrLine].textWidth = width
+}
+
 
 function changeLine() {
     if (gCurrLine === (gMeme.lines.length - 1)) {
@@ -63,10 +72,10 @@ function deleteText(pos) {
         document.querySelector('.edit-text input').value = ''
         return
     }
+
     gMeme.lines.splice(gCurrLine, 1)
     if (gCurrLine === 0) return
     gCurrLine--
-
 }
 
 function fontSizeUp() {
@@ -95,12 +104,17 @@ function strokeColorChange(strokeColor) {
     gMeme.lines[gCurrLine].strokeColor = strokeColor
 }
 
-// handle text dragging //
+
+// Handle text dragging //
+
 function isTextClicked(clickedPos) {
     const { pos } = gMeme.lines[gCurrLine]
-    // console.log(pos);
-    const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
-    return distance <= 50
+    const { textWidth } = gMeme.lines[gCurrLine]
+    const { size } = gMeme.lines[gCurrLine]
+
+    const distance = Math.sqrt(((pos.x + textWidth / 2) - clickedPos.x) ** 2 + ((pos.y - size / 2) - clickedPos.y) ** 2)
+
+    return distance <= textWidth / 2
 }
 
 function setTextDrag(isDrag) {

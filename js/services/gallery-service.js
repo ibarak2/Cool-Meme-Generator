@@ -101,31 +101,31 @@ let gGallery = [
         id: 20,
         imgURL: 'imgs/good-memes/20.jpg',
         keywords: ['kid', 'nerd']
-    },
-
-
+    }
 ]
+
+
+// CRUDL functions //
 
 function getGalleryForDisplay() {
     const gallery = gGallery
+
     return gallery
 }
 
 function getImgById(imgId) {
     const gallery = gGallery
     let img = gallery.find(element => element.id === imgId)
+
     return img
 }
 
 function getGallerySearch(val) {
-    console.log(val);
     let gallery = gGallery.filter(img => img.keywords.find(element => {
         if (element.includes(val)) {
             return true
         }
     }))
+
     return gallery
-
-
-
 }

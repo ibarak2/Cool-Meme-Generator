@@ -8,8 +8,6 @@
     <title>Meme Generator</title>
     <link rel="shortcut icon" href="imgs/favicon/rickroll.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/main.css">
-
-
 </head>
 
 <body onload="onInit()">
@@ -39,30 +37,33 @@
 
         <input oninput="onSearchInput()" type="text" placeholder="Search Image..." id="search-input">
         <div class="search-keywords flex justify-center align-center"></div>
-
     </section>
 
 
     <section class="main-gallery">
-        <div class="grid-container">
-        </div>
-
+        <div class="grid-container"></div>
     </section>
 
 
     <section class="main-edit flex justify-center">
+
         <div class="canvas-container">
             <canvas width="666" height="666" style="outline:1px solid black"></canvas>
         </div>
 
         <div class="edit-container">
+
             <div class="edit-text">
                 <input class="text-input" type="text" oninput="onTypingText()" placeholder="Write Your text here...">
             </div>
+
             <div class="edit-add"><button class="add-btn" onclick="onAddNewText()">+</button></div>
-            <div class="edit-change"><button class="change-btn" onclick="onChangeLine()">Change line</button></div>
+
+            <div class="edit-change"><button class="change-btn" onclick="onChangeLine()">Change line ↑↓</button></div>
+
             <div class="edit-delete"><button class="delete-btn" onclick="onDeleteText()">Delete
                     Text</button></div>
+
             <div class="edit-fonts">
                 <button class="size-btn" onclick="onFontSizeUp()">A+</button>
                 <button class="size-btn" onclick="onFontSizeDown()">A-</button>
@@ -80,18 +81,17 @@
 
             <div class="edit-download"><button class="export-btn" onclick="onDownload()"><a
                         href="">Download</a></button></div>
+
             <div class="edit-save"><button class="export-btn" onclick="onSave()">Save</button></div>
+
             <div class="edit-share"><button class="export-btn" onclick="onShareToFacebook()">Share</button></div>
 
-
-
         </div>
-
     </section>
 
-
-    <section class="main-saved">
-        <img src="" alt="">
+    <section class="saved-gallery">
+        <h2>Saved</h2>
+        <div class="main-saved"></div>
     </section>
 
     <div class="user-msg"></div>
@@ -106,7 +106,7 @@
                 <li><a href="https://bit.ly/3E4rJHn" target="_blank">Youtube</a></li>
                 <li><a href="https://bit.ly/3PP8LdP" target="_blank">LinkedIn</a></li>
             </ul>
-            <p>© Barak Kaldess</p>
+            <p>© Barak Kaldess 2022</p>
             <button class="about-btn" onclick="closeAbout()">close</button>
         </section>
     </div>
@@ -115,7 +115,6 @@
     <script src="js/services/upload-service.js"></script>
     <script src="js/services/gallery-service.js"></script>
     <script src="js/services/meme-service.js"></script>
-    <script src="js/gallery-controller.js"></script>
     <script src="js/meme-controller.js"></script>
     <script src="js/main-controller.js"></script>
 </body>
