@@ -526,13 +526,15 @@ a {
   background-color: var(--color-grey);
   background-image: url("https://www.transparenttextures.com/patterns/woven-light.png");
   text-align: center;
-  padding: 15%;
+  /* padding: 50px; */
+  padding-left: 25px;
+  padding-right: 25px;
   position: relative;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   border-radius: 15px;
-  font-size: 1.5em;
+  font-size: 1.2em;
 
   width: 85%;
   height: 85%;
@@ -837,5 +839,10 @@ a {
 
   .toggle-menu {
     display: none;
+  }
+
+  /* about */
+  .main-about {
+    font-size: 1.5em;
   }
 }

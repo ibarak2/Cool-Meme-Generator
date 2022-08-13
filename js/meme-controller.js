@@ -11,18 +11,20 @@ let gUserImage
 
 // this function handles user text input 
 function onTypingText() {
+
     // set current text input value to relevant gMeme text line
     const elText = document.querySelector('.edit-text input').value
     setMemeText(elText, gCurrLine)
 
     // sets current text width value
-    const currMeme = getMeme()
-    let txtWidth = gCtx.measureText(currMeme.lines[gCurrLine].text)
-    setTextWidth(txtWidth.width)
+    onSetTextWidth()
 
     // handle mouse and touch events, then renders the meme
     addListeners()
     renderMeme()
+
+    // focus on text
+    textFocus()
 }
 
 //  this function checks if images was uploaded by the user or picked from the website gallery 
@@ -59,7 +61,6 @@ function loadImageFromInput(ev, onImageReady) {
 
     reader.onload = (event) => {
         var img = new Image()
-        // console.log(img.height);
         img.src = event.target.result
         img.onload = onImageReady.bind(null, img)
     }
@@ -132,7 +133,7 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-    let meme = getMeme();
+    const meme = getMeme();
 
     if (!meme.lines[gCurrLine].isDrag) return
 
@@ -142,6 +143,9 @@ function onMove(ev) {
     moveText(dx, dy)
     gStartPos = pos
     renderMeme()
+
+    // focus on text
+    textFocus()
 }
 
 function getEvPos(ev) {
@@ -166,6 +170,26 @@ function onUp() {
     renderMeme()
 }
 
+function textFocus() {
+    // rect positioning
+    const newMeme = getMeme()
+    const currLine = newMeme.lines[gCurrLine]
+
+    gCtx.beginPath()
+    gCtx.lineWidth = '2'
+    gCtx.rect(currLine.pos.x - 15, currLine.pos.y + 10, currLine.textWidth + 30, (currLine.size + 10) * -1)
+    gCtx.stroke()
+    gCtx.closePath()
+    //
+}
+
+function onSetTextWidth() {
+    const currMeme = getMeme()
+    gCtx.font = `${currMeme.lines[gCurrLine].size}px Impact`
+    let txtWidth = gCtx.measureText(currMeme.lines[gCurrLine].text)
+    setTextWidth(txtWidth.width)
+}
+
 // Edit Buttons //
 
 function onAddNewText() {
@@ -173,12 +197,19 @@ function onAddNewText() {
     const center = { x: elCanvas.width / 2, y: elCanvas.height / 2 }
     newTextLine(center)
     document.querySelector('.edit-text input').value = ''
+
+    // focus on text
+    textFocus()
 }
 
 function onChangeLine() {
     changeLine()
     const currTextLine = getMeme().lines[gCurrLine].text
     document.querySelector('.edit-text input').value = currTextLine
+
+    onSetTextWidth()
+    // focus on text
+    textFocus()
 }
 
 function onDeleteText() {
@@ -193,11 +224,13 @@ function onDeleteText() {
 function onFontSizeUp() {
     fontSizeUp()
     renderMeme()
+    onSetTextWidth()
 }
 
 function onFontSizeDown() {
     fontSizeDown()
     renderMeme()
+    onSetTextWidth()
 }
 
 function onStrokeSizeUp() {

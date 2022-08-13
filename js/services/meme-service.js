@@ -44,8 +44,7 @@ function newTextLine(pos) {
     }
 
     gMeme.lines.push(newText)
-    console.log("Add new Text");
-    gCurrLine++
+    gCurrLine = gMeme.lines.length - 1
 }
 
 function setMemeText(memeText, lineIdx) {
