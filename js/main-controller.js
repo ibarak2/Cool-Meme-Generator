@@ -77,6 +77,11 @@ function onSearchInput() {
     renderGallery()
 }
 
+function onClearSearch() {
+    elSearch.value = ''
+    onSearchInput()
+}
+
 
 // Pick or Upload a meme image //
 
@@ -96,6 +101,7 @@ function onImgSelect(imgId) {
 
     // cleans edit text input value
     document.querySelector('.text-input').value = ''
+
 }
 
 function onImgUpload(ev) {

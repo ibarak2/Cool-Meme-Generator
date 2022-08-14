@@ -34,8 +34,11 @@
         <button class="upload-btn" onclick="document.querySelector('.file-input').click();">Upload Image...</button>
         <input type="file" style="display:none;" class="file-input" name="image" accept="image/*"
             onchange="onImgUpload(event)" />
+        <div class="search-bar-container">
+            <input oninput="onSearchInput()" type="text" placeholder="Search Image..." id="search-input">
+            <button onclick="onClearSearch()" class="clear">clear</button>
 
-        <input oninput="onSearchInput()" type="text" placeholder="Search Image..." id="search-input">
+        </div>
         <div class="search-keywords flex justify-center align-center"></div>
     </section>
 
@@ -57,9 +60,7 @@
                 <input class="text-input" type="text" oninput="onTypingText()" placeholder="Write Your text here...">
             </div>
 
-            <div class="edit-add"><button class="add-btn" onclick="onAddNewText()">+</button></div>
-
-            <div class="edit-change"><button class="change-btn" onclick="onChangeLine()">Change line ↑↓</button></div>
+            <div class="edit-add"><button class="add-btn" onclick="onAddNewText()">Add Text</button></div>
 
             <div class="edit-delete"><button class="delete-btn" onclick="onDeleteText()">Delete
                     Text</button></div>
@@ -115,7 +116,7 @@
     <script src="js/services/upload-service.js"></script>
     <script src="js/services/gallery-service.js"></script>
     <script src="js/services/meme-service.js"></script>
-    <script src="js/meme-controller.js"></script>
+    <script src="js/meme-editor-controller.js"></script>
     <script src="js/main-controller.js"></script>
 </body>
 

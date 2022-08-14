@@ -14,7 +14,7 @@ function setNewMeme(imgId, pos) {
                 size: 40,
                 color: 'white',
                 strokeColor: 'black',
-                strokeSize: 8,
+                strokeSize: 10,
                 pos,
                 isDrag: false,
                 textWidth: 0
@@ -35,7 +35,7 @@ function newTextLine(pos) {
     let newText = {
         text: '',
         size: 40,
-        strokeSize: 8,
+        strokeSize: 10,
         color: 'white',
         strokeColor: 'black',
         pos,
@@ -107,14 +107,29 @@ function strokeColorChange(strokeColor) {
 // Handle text dragging //
 
 function isTextClicked(clickedPos) {
-    const { pos } = gMeme.lines[gCurrLine]
-    const { textWidth } = gMeme.lines[gCurrLine]
-    const { size } = gMeme.lines[gCurrLine]
 
-    const distance = Math.sqrt(((pos.x + textWidth / 2) - clickedPos.x) ** 2 + ((pos.y - size / 2) - clickedPos.y) ** 2)
+    for (let i = 0; i < gMeme.lines.length; i++) {
+        const line = gMeme.lines[i]
+        const { pos, textWidth, size } = line
+        const rectY = pos.y - size
 
-    return distance <= textWidth / 2
+        if (clickedPos.x > pos.x - 10 && clickedPos.x < pos.x + textWidth + 10 && clickedPos.y > rectY && clickedPos.y < rectY + size) {
+            gCurrLine = i
+
+            return true
+        }
+    }
+    return false
 }
+
+//
+function calcRectX(line, txtWidth) {
+
+    let x = line.pos.x - txtWidth * 0.3
+
+    return x
+}
+//
 
 function setTextDrag(isDrag) {
     gMeme.lines[gCurrLine].isDrag = isDrag
