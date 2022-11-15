@@ -4,6 +4,10 @@ Stylish Meme Generator project
 ## About The Project
 
 This is my Second "Sprint" project at the Coding Academy Bootcamp, using some vanilla JS to build a nice Meme Generator.
+<br>
+![desktop1](https://res.cloudinary.com/ibarak/image/upload/v1668496306/finished%20projects%20previews/qrjjnhei3zybcfcoy5xu.jpg)
+![desktop2](https://res.cloudinary.com/ibarak/image/upload/v1668496310/finished%20projects%20previews/sa7jx2pvesvodcyvr45u.jpg)
+![mobile1](https://res.cloudinary.com/ibarak/image/upload/v1668496305/finished%20projects%20previews/df3jbiogxmhi0ysmujnq.jpg)
 
 
 ## Contact
